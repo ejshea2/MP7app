@@ -100,20 +100,20 @@
                 <Button
                     android:id="@+id/video"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100sp"
                     android:text="Youtube Link" />
 
                 <Button
                     android:id="@+id/article"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100sp"
                     android:text="Button"
                     tools:text="Article Link" />
 
                 <Button
                     android:id="@+id/reddit"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="100sp"
                     android:text="Reddit Campaign" />
 
             </LinearLayout>
