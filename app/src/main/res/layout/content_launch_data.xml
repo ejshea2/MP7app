@@ -11,32 +11,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="top|center"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/launchNumTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Launch Number:"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/launchNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="00"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/launchDateTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Launch Date:"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/launchDateNum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0000-00-00"
@@ -53,19 +53,71 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/rocketName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="Rocket Name:"
+                    android:textSize="32sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/launchSite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
+                    android:text="Launch Site:"
+                    android:textSize="32sp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Launch was (successful/failed)"
+                    android:textSize="32sp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                <TextView
+                    android:id="@+id/spaces"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="     "
+                    android:textSize="32sp"/>
+
+                <TextView
+                    android:id="@+id/links"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LINKS"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/spaces2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="      "
+                    android:textSize="32sp"/>
+
+                <Button
+                    android:id="@+id/video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Youtube Link" />
+
+                <Button
+                    android:id="@+id/article"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Button"
+                    tools:text="Article Link" />
+
+                <Button
+                    android:id="@+id/reddit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Reddit Campaign" />
+
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
