@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MP7</string>
     <string name="title_activity_launch_data">Launch Data</string>
+    <string name="title_activity_past_launches">PastLaunches</string>
 </resources>

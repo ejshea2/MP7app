@@ -26,4 +26,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, launch_data.class);
         startActivity(intent);
     }
+
+    public void pastLaunch(View view) {
+        Intent intent = new Intent(this, PastLaunches.class);
+        startActivity(intent);
+    }
 }

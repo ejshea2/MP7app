@@ -19,6 +19,10 @@
         <activity
             android:name=".launch_data"
             android:label="@string/title_activity_launch_data"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PastLaunches"
+            android:label="@string/title_activity_past_launches"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

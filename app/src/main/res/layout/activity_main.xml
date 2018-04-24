@@ -16,6 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="205dp"
             android:autoText="false"
+            android:onClick="pastLaunch"
             android:text="Past Launches"
             android:textSize="32sp"
             tools:layout_editor_absoluteX="124dp"
