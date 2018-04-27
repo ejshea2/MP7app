@@ -31,8 +31,16 @@ public class launch_data extends AppCompatActivity {
     Typeface tfc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        // Set up a queue for our Volley requests
+        requestQueue = Volley.newRequestQueue(this);
+
+        // display the application frame
         setContentView(R.layout.activity_launch_data);
+
+        // set textviews and fonts and shit
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         launch_num_text = (TextView) findViewById(R.id.launchNumTxt);
@@ -44,37 +52,36 @@ public class launch_data extends AppCompatActivity {
         launch_date_text.setTypeface(tfc);
         launch_num.setTypeface(tfc);
         launch_num_text.setTypeface(tfc);
-        startAPIcall("rocket_id");
+
+        Log.d(TAG, "hi");
+
+        // call the functions
+        startAPICall();
     }
 
-    String startAPIcall(final String fieldName) {
+    void startAPICall() {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://api.spacexdata.com/v2/launches/latest",
+                    "https://api.spacexdata.com/v2/launches",
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(final JSONObject response) {
                             try {
-                                Log.d(TAG, "HERERERERERERERERER" + response.toString(2));
-
-
-                            } catch (JSONException ignored) { }
+                                Log.d(TAG, response.toString());
+                            } catch (Exception e) { }
                         }
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(final VolleyError error) {
-                    Log.e(TAG, error.toString());
+                    Log.w(TAG, error.toString());
                 }
             });
-            String json = jsonObjectRequest.toString();
-            Log.d(TAG, json);
-            return json;
+            requestQueue.add(jsonObjectRequest);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
     }
 
 }
