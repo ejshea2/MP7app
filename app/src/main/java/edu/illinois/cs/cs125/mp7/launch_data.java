@@ -20,12 +20,15 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class launch_data extends AppCompatActivity {
+public class launch_data extends MainActivity {
     /** Default logging tag for messages from the main activity. */
-    private static final String TAG = "MP7:main";
+    private static final String TAG = "MP7:launch_data";
 
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
+
+    private static String launches = "/launches";
+    private static String latest = "/latest";
 
     TextView launch_date_num, launch_date_text, launch_num, launch_num_text;
     Typeface tfc;
@@ -40,26 +43,14 @@ public class launch_data extends AppCompatActivity {
         // display the application frame
         setContentView(R.layout.activity_launch_data);
 
-        // set textviews and fonts and shit
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        launch_num_text = (TextView) findViewById(R.id.launchNumTxt);
-        launch_num = (TextView) findViewById(R.id.launchNum);
-        launch_date_text = (TextView) findViewById(R.id.launchDateTxt);
-        launch_date_num = (TextView) findViewById((R.id.launchDateNum));
-        tfc = Typeface.createFromAsset(getAssets(), "fonts/Prototype.ttf");
-        launch_date_num.setTypeface(tfc);
-        launch_date_text.setTypeface(tfc);
-        launch_num.setTypeface(tfc);
-        launch_num_text.setTypeface(tfc);
-
         Log.d(TAG, "hi");
 
         // call the functions
-        startAPICall();
+        startAPICall(launches, latest);
     }
 
-    void startAPICall() {
+    @Override
+    protected void startAPICall(String ... tags) {
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
@@ -70,6 +61,26 @@ public class launch_data extends AppCompatActivity {
                         public void onResponse(final JSONObject response) {
                             try {
                                 Log.d(TAG, response.toString());
+                                TextView launch_date_num, launch_date_text, launch_num, launch_num_text;
+
+                                // set textviews and fonts and shit
+                                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                                setSupportActionBar(toolbar);
+                                launch_num_text = (TextView) findViewById(R.id.launchNumTxt);
+                                launch_num = (TextView) findViewById(R.id.launchNum);
+                                launch_date_text = (TextView) findViewById(R.id.launchDateTxt);
+                                launch_date_num = (TextView) findViewById((R.id.launchDateNum));
+                                tfc = Typeface.createFromAsset(getAssets(), "fonts/Prototype.ttf");
+                                launch_date_num.setTypeface(tfc);
+                                launch_date_text.setTypeface(tfc);
+                                launch_num.setTypeface(tfc);
+                                launch_num_text.setTypeface(tfc);
+
+                                //Parsing the json data to each textView.
+                                String json = response.toString();
+                                launch_num.setText(json.substring(json.indexOf(":") + 1, json.indexOf(",")));
+                                Log.d(TAG, "HERE");
+
                             } catch (Exception e) { }
                         }
                     }, new Response.ErrorListener() {

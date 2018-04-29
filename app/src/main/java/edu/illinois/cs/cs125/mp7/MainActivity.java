@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     /** Url tags for requesting different things from the api. */
     private static String launches = "/launches";
     private static String latest = "/latest";
+    private static String flight_number = "/flight_number";
 
 
     @Override
@@ -66,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(final View v) {
                 Log.d(TAG, "Get latest launch button clicked");
                 startAPICall(launches, latest);
+                newLaunch();
             }
         });
 
@@ -76,12 +78,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(final View v) {
                 Log.d(TAG, "Get past launches button clicked");
                 startAPICall(launches);
+                pastLaunch();
             }
         });
 
     }
 
-    private void startAPICall(final String ... tags) {
+    protected void startAPICall(final String ... tags) {
 
         // create the url tag using all the passed in tags
         StringBuilder builder = new StringBuilder();
@@ -99,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
                     new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(final JSONArray response) {
-                                Log.d(TAG, response.toString());
+                                String json = response.toString();
+                                Log.d(TAG, json.substring(json.indexOf(":") + 1, json.indexOf(",")));
                         }
                     }, new Response.ErrorListener() {
                 @Override
