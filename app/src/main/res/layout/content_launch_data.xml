@@ -163,7 +163,7 @@
                     android:id="@+id/article"
                     android:layout_width="match_parent"
                     android:layout_height="100sp"
-                    android:text="Button"
+                    android:text="Article Link"
                     tools:text="Article Link" />
 
                 <Button

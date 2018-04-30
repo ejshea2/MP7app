@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.content.Intent;
+import android.net.Uri;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,6 +46,9 @@ public class launch_data extends AppCompatActivity {
     private final String fail = "Launch Result: Failure";
     private final String rocket_type = "Rocket: ";
     private final String launch_site = "Launch Site: ";
+    private String video_url = "";
+    private String reddit_url = "";
+    private String article_url = "";
 
     /** Views */
     TextView launchNum, launchDateNum, rocket, site, result, detail;
@@ -77,6 +82,30 @@ public class launch_data extends AppCompatActivity {
 
         // call latest launch
         startAPICall(0);
+
+        // connect the buttons to the links
+        Button youTube = findViewById(R.id.video);
+        Button reddit_button = findViewById(R.id.reddit);
+        Button article_button = findViewById(R.id.article);
+        youTube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) {
+                goToURL(video_url);
+            }
+        });
+        reddit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) {
+                goToURL(reddit_url);
+            }
+        });
+        article_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) {
+                goToURL(article_url);
+            }
+        });
+
     }
 
     // get the API data for ONE launch (does not work for past launches which returns an array)
@@ -117,6 +146,9 @@ public class launch_data extends AppCompatActivity {
                                 String launchSite = launch_site + response.getJSONObject("launch_site").getString("site_name_long");
                                 boolean launchResult = response.getBoolean("launch_success");
                                 String launchDetails = response.getString("details");
+                                video_url = response.getJSONObject("links").getString("video_link");
+                                reddit_url = response.getJSONObject("links").getString("reddit_campaign");
+                                article_url = response.getJSONObject("links").getString("article_link");
 
                                 // set the view objects
                                 if (num < 10) {
@@ -163,6 +195,13 @@ public class launch_data extends AppCompatActivity {
             Log.d(TAG, e.toString());
         }
         return null;
+    }
+
+    //Method to help go to a website
+    private void goToURL(String url) {
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
     }
 
 
