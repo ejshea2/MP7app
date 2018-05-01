@@ -23,9 +23,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,6 +59,9 @@ public class launch_data extends AppCompatActivity {
     /** Request queue for our API requests. */
     private static RequestQueue requestQueue;
 
+    /** launch code for PAI call. */
+    private int launch_code;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -80,8 +85,10 @@ public class launch_data extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        System.out.println("LAUNCH CODE: "+launch_code);
+
         // call latest launch
-        startAPICall(0);
+        startAPICall(launch_code);
 
         // connect the buttons to the links
         Button youTube = findViewById(R.id.video);
@@ -111,21 +118,11 @@ public class launch_data extends AppCompatActivity {
     // get the API data for ONE launch (does not work for past launches which returns an array)
     void startAPICall(final int flightNum) {
 
-        // the attachment to the end of the url
-        String flightIndentifier = "";
-
-        // set up the url tag for the right launch
-        if (flightNum == 0) {
-            flightIndentifier = "/latest";
-        } else {
-            flightIndentifier = "?flight_number=" + flightNum;
-        }
-
         // API GET request
         try {
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                     Request.Method.GET,
-                    "https://api.spacexdata.com/v2/launches" + flightIndentifier,
+                    "https://api.spacexdata.com/v2/launches/latest",
                     null,
                     new Response.Listener<JSONObject>() {
                         @Override

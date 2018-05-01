@@ -1,5 +1,6 @@
 package edu.illinois.cs.cs125.mp7;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -7,35 +8,54 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.ArrayList;
 
 public class PastLaunches extends AppCompatActivity {
-    Button b1, b2, b3, b4, b5, b6, b7, b8;
+
+    /** Button stuff. */
     Typeface tfc;
+
+    /** Log tag. */
+    private static final String TAG = "PAST LAUNCHES: ";
+
+    /** Intent kwargs. */
+    private int numLaunches;
+    private boolean latestCalled;
+    private int btag;
+    private Button butt = new Button(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_past_launches);
+        setContentView(R.layout.content_past_launches);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        b1 = (Button) findViewById(R.id.button2);
-        b2 = (Button) findViewById(R.id.button3);
-        b3 = (Button) findViewById(R.id.button4);
-        b4 = (Button) findViewById(R.id.button5);
-        b5 = (Button) findViewById(R.id.button6);
-        b6 = (Button) findViewById(R.id.button7);
-        b7 = (Button) findViewById(R.id.button8);
-        b8 = (Button) findViewById(R.id.button9);
-        tfc = Typeface.createFromAsset(getAssets(), "fonts/Prototype.ttf");
-        b1.setTypeface(tfc);
-        b2.setTypeface(tfc);
-        b3.setTypeface(tfc);
-        b4.setTypeface(tfc);
-        b5.setTypeface(tfc);
-        b6.setTypeface(tfc);
-        b7.setTypeface(tfc);
-        b8.setTypeface(tfc);
+
+        // get the data from the intent
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        try {
+            if (!bundle.isEmpty()) {
+                if (bundle.containsKey("latest") && bundle.containsKey("launches")) {
+                    numLaunches = bundle.getInt("launches");
+                    latestCalled = bundle.getBoolean("latest");
+                }
+            }
+        } catch (Exception e) {
+            Log.d(TAG, e.toString());
+        }
+
+        newLaunch();
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +66,7 @@ public class PastLaunches extends AppCompatActivity {
         });
     }
 
-    public void newLaunch(View view) {
+    public void newLaunch() {
         Intent intent = new Intent(this, launch_data.class);
         startActivity(intent);
     }

@@ -18,9 +18,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/ll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+
+        </LinearLayout>
+
     </ScrollView>
 
     <LinearLayout
@@ -33,60 +38,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:onClick="newLaunch"
-            android:text="Launch 1" />
-
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:onClick="newLaunch"
-            android:text="Launch 2" />
-
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:onClick="newLaunch"
-            android:text="Launch 3" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:onClick="newLaunch"
-            android:text="Launch 4" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:onClick="newLaunch"
-            android:text="Launch 5" />
-
-        <Button
-            android:id="@+id/button7"
-            android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:onClick="newLaunch"
-            android:text="Launch 6" />
-
-        <Button
-            android:id="@+id/button8"
-            android:layout_width="match_parent"
-            android:layout_height="100sp"
-            android:onClick="newLaunch"
-            android:text="Launch 7" />
-
-        <Button
-            android:id="@+id/button9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="newLaunch"
-            android:text="Launch 8" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
